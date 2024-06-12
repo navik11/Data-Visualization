@@ -1,0 +1,29 @@
+.x.axis path,
+.x.axis line {
+  fill: none;
+  stroke: #000;
+  opacity: 0.06;
+  shape-rendering: crispEdges;
+}
+
+.x.axis .tick line {
+  opacity: 0.06;
+}
+
+.x.axis .tick text {
+  font-size: 12px;
+  fill: #979797;
+}
+
+.timeline_info_div {
+    font-size: 12px;
+    color: #858585;
+    margin-bottom: 20px;
+    margin-top: 7px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.timeline_info_div .time_legends{
+    display: flex;
+    justify-content: space-between;
+}

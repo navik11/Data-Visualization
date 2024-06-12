@@ -1,0 +1,12 @@
+.inputText {
+  background-color: white;
+  border: none;
+  color: #333;
+  padding: 3px 5px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 3px;
+}
