@@ -1,30 +1,19 @@
-# React + TypeScript + Vite
+# Data Visualization tool
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Repository for a tool to visualize bulk data generated from parallel processes.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This tool is build with D3js, Python and React. So, We must have Python and NodeJS installed in our system.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+- Clone the repo 
+```git
+git clone https://github.com/navik11/Data-Visualization
 ```
+- Get into the project folder.
+- Run `npm install`, to installed the dependencies.
+- Setup the Python virtual enviroment by `source appenv/bin/activate`
+- Run `python processor/main.py` to start the data processor, this will help us to process the data and returns a JSON data which can be plotted easly with the help of D3js (this will consume the localhost:5000).
+- Start the tool by running `npm run dev`
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- The application is in ready state at http://localhost:5173.
