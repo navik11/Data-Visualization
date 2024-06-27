@@ -18,7 +18,7 @@ def numerical_sort(value):
     return [int(part) if part.isdigit() else part for part in parts]
 
 @app.route('/api/process_data', methods=['POST'])
-def run_script():
+def run_process_data_script():
     data = request.json
     folderPath = data.get('folderPath')
     if not check_folder_exists(folderPath):
@@ -26,6 +26,44 @@ def run_script():
 
     result = process_data(folderPath)
     return result
+
+@app.route('/api/process_tag_data', methods=['POST'])
+def run_process_tag_data_script():
+    data = request.json
+    folderPath = data.get('folderPath')
+    if not check_folder_exists(folderPath):
+        return make_response(jsonify({"error":'Folder does not exist'}), 404)
+
+    result = process_tag_data(folderPath)
+    return result
+
+def process_tag_data(folderPath):
+    data_files = sorted([file for file in os.listdir(folderPath) if file.endswith('.txt') and file != 'execution_time.txt'], key=numerical_sort)
+
+    if not data_files:
+        return {"error": "No data files found"}
+    
+    dataframes = []
+
+    cnt = 0
+
+    for file in data_files:
+        file_path = os.path.join(folderPath, file)
+
+        try:
+            df = pd.read_csv(file_path)
+            df = df.rename(columns={'tag': 'state', 'func_name': 'age', 'duration': 'population'})
+            df['state'] = df['state'].astype(str)
+            grouped_data = df.groupby(['state', 'age']).agg({'population':'sum'}).reset_index()
+            dataframes.append(grouped_data.to_dict(orient='records'))
+        except Exception as e:
+            return {"error": f"Error processing file {file_path}"}
+        
+        cnt = cnt + 1
+        if(cnt == 10):
+            break
+
+    return dataframes
 
 def process_data(folderPath):
     data_files = sorted([file for file in os.listdir(folderPath) if file.endswith('.txt') and file != 'execution_time.txt'], key=numerical_sort)
